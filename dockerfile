@@ -23,7 +23,8 @@ COPY --chown=user . $HOME/app
 
 # Copy and install dependencies 
 COPY requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r /requirements.txt
 
 # Launch mlflow server 
 # Here we chose to have $PORT as environment variable but you could have hard coded 7860 
@@ -32,11 +33,11 @@ RUN pip install -r /requirements.txt
 # type of server
 CMD mlflow server -p $PORT \
 --host 0.0.0.0 \
---allowed-hosts charlestng-dsfsft-39-mlflow-charles.hf.space \ 
+# --allowed-hosts charlestng-dsfsft-39-mlflow-charles.hf.space \ 
 # replace with your 
---cors-allowed-origins "https://charlestng-dsfsft-39-mlflow-charles.hf.space" \
---backend-store-uri $BACKEND_STORE_URI \
---default-artifact-root $ARTIFACT_STORE_URI
+# --cors-allowed-origins "https://charlestng-dsfsft-39-mlflow-charles.hf.space" \
+# --backend-store-uri $BACKEND_STORE_URI \
+# --default-artifact-root $ARTIFACT_STORE_URI
 
 # Read the doc: https://huggingface.co/docs/hub/spaces-sdks-docker
 # you will also find guides on how best to write your Dockerfile
