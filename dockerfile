@@ -23,11 +23,11 @@ RUN pip install --no-cache-dir -r /requirements.txt
 # Advantage to use an env variable is that your code is more portable if you were to deploy to another 
 # type of server
 CMD mlflow ui -p $PORT \
---host 0.0.0.0
+--host 0.0.0.0 \
 # --allowed-hosts charlestng-dsfsft-39-mlflow-charles.hf.space \ 
 # replace with your 
 # --cors-allowed-origins "https://charlestng-dsfsft-39-mlflow-charles.hf.space" \
-# --backend-store-uri $BACKEND_STORE_URI \
+--backend-store-uri $BACKEND_STORE_URI 
 # --default-artifact-root $ARTIFACT_STORE_URI
 
 # Read the doc: https://huggingface.co/docs/hub/spaces-sdks-docker
