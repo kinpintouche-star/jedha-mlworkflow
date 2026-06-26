@@ -37,9 +37,15 @@ mlflow.set_experiment(EXPERIMENT_NAME)
 # Get our experiment info
 experiment = mlflow.get_experiment_by_name(EXPERIMENT_NAME)
 
+# Call mlflow autolog
+mlflow.sklearn.autolog()
+
 with mlflow.start_run(experiment_id = experiment.experiment_id):
+    # Specified Parameters
+    c = 0.5
+
     # Instanciate and fit the model
-    lr = LogisticRegression()
+    lr = LogisticRegression(C=c)
     lr.fit(X_train.values, y_train.values)
 
     # Store metrics
@@ -49,6 +55,3 @@ with mlflow.start_run(experiment_id = experiment.experiment_id):
     # Print results
     print("LogisticRegression model")
     print("Accuracy: {}".format(accuracy))
-
-    # Log Metric
-    mlflow.log_metric("Accuracy", accuracy)
